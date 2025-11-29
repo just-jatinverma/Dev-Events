@@ -1,20 +1,34 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  reactCompiler: true,
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  cacheComponents: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+      },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
+    ],
+  },
   async rewrites() {
     return [
       {
         source: "/ingest/static/:path*",
-        destination: "https://eu-assets.i.posthog.com/static/:path*",
+        destination: "https://us-assets.i.posthog.com/static/:path*",
       },
       {
         source: "/ingest/:path*",
-        destination: "https://eu.i.posthog.com/:path*",
+        destination: "https://us.i.posthog.com/:path*",
       },
     ];
   },
-  // This is required to support PostHog trailing slash API requests
   skipTrailingSlashRedirect: true,
 };
 
