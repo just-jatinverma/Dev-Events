@@ -2,8 +2,8 @@ import Link from "next/link";
 import Image from "next/image";
 
 interface Props {
-  image: string;
   title: string;
+  image: string;
   slug: string;
   location: string;
   date: string;
@@ -12,7 +12,7 @@ interface Props {
 
 const EventCard = ({ title, image, slug, location, date, time }: Props) => {
   return (
-    <Link href={"/events"} id="event-card">
+    <Link href={`/events/${slug}`} id="event-card">
       <Image
         src={image}
         alt={title}
@@ -30,16 +30,11 @@ const EventCard = ({ title, image, slug, location, date, time }: Props) => {
 
       <div className="datetime">
         <div>
-          <Image
-            src={"/icons/calendar.svg"}
-            alt="date"
-            width={14}
-            height={14}
-          />
+          <Image src="/icons/calendar.svg" alt="date" width={14} height={14} />
           <p>{date}</p>
         </div>
         <div>
-          <Image src={"/icons/clock.svg"} alt="date" width={14} height={14} />
+          <Image src="/icons/clock.svg" alt="time" width={14} height={14} />
           <p>{time}</p>
         </div>
       </div>
